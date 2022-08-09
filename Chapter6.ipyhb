@@ -1,0 +1,134 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "private_outputs": true,
+      "provenance": [],
+      "collapsed_sections": [],
+      "authorship_tag": "ABX9TyNzCAa5HEEy1HF7KTQB6X1U",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Amel7273/deep-pytorch/blob/main/Chapter6.ipyhb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "uQVL_43-aphM"
+      },
+      "outputs": [],
+      "source": [
+        "## 딥러닝 파이토치 Chapter 6-1 / LeNet-5 구현"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 6-1 필요한 라이브러리 호출\n",
+        "import torch\n",
+        "import torchvision\n",
+        "from torch.utils.data import DataLoader, Dataset\n",
+        "from torchvision import transforms # 이미지 전처리 기능을 제공\n",
+        "from torch.autograd import Variable\n",
+        "from torch import optim\n",
+        "import torch.nn as nn\n",
+        "import torch.nn.functional as F\n",
+        "import os\n",
+        "import cv2\n",
+        "from PIL import Image\n",
+        "from tqdm import tqdm_notebook as tqdm\n",
+        "import random\n",
+        "from matplotlib import pyplot as plt\n",
+        "\n",
+        "device = torch.device(\"cuda:0\" if torch.cuda.is_available() else \"cpu\")"
+      ],
+      "metadata": {
+        "id": "1dyGRkHDazbr"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 6-2 이미지 데이터셋 전처리\n",
+        "class ImageTransform():\n",
+        "  def __init__(self, resize, mean, std):\n",
+        "    self.data_transform = {\n",
+        "        'train' : transforms.Compose([\n",
+        "            RandomResizedCrop(resize,scale=(0.5,1.0)),\n",
+        "            transforms.RandomHorizontalFlip(),\n",
+        "            transforms.ToTensor(),\n",
+        "            transforms.Normalize(mean,std)           \n",
+        "        ]),\n",
+        "        'val' : transforms.Compose([\n",
+        "            transforms.Resize(256),\n",
+        "            transforms.CenterCrop(resize),\n",
+        "            transforms.ToTensor(),\n",
+        "            transforms.Normalize(mean,std)\n",
+        "        ])\n",
+        "    }\n",
+        "  def __call__(self, img, phase):\n",
+        "    return self.data_transform[phase](img)"
+      ],
+      "metadata": {
+        "id": "833G7F0wbkmB"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from google.colab import files\n",
+        "file_uploaded=files.upload()"
+      ],
+      "metadata": {
+        "id": "eKlQeOSddzpi"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!unzip dogs-vs-cats.zip -d dogs-vs-cats/  #dogs-vs-cats 폴더 만들어 압축 풀기"
+      ],
+      "metadata": {
+        "id": "bTfwFTaMgVeL"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cat_directory = r"
+      ],
+      "metadata": {
+        "id": "GuSDrZiYg3Ly"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
